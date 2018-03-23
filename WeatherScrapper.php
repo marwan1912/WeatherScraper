@@ -3,8 +3,8 @@
 
 /*
 By: Marwan El Sharkawy.
-This website is for practicing purposes, it is getting the weather forecast for different cities from weather-forecast.com and displays it to the user. PHP is used to scrap the content related to the weather condition in a given city from the main website.
-
+This website is for practicing purposes, it is getting the weather forecast for different cities from weather-forecast.com and displays 
+it to the user. PHP is used to scrap the content related to the weather condition in a given city from the main website.
 */
     $forecast="";
 
