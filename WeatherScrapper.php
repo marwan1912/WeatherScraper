@@ -1,15 +1,7 @@
 <?php
       
-
-/*
-By: Marwan El Sharkawy.
-This website is for practicing purposes, it is getting the weather forecast for different cities from weather-forecast.com and displays 
-it to the user. PHP is used to scrap the content related to the weather condition in a given city from the main website.
-*/
     $forecast="";
-
-    if($_GET["city"]){
-        
+    if(isset($_GET["city"])){
         $city= str_replace(" ","",$_GET["city"]); //To remove the spaces within the name of a given city as New York so the website can track the url of the main website (weather-forecast.com) and scrap the desired parts from the whole page.
         
         $pageToBeScrapped= file_get_contents("https://www.weather-forecast.com/locations/".$city."/forecasts/latest");
@@ -21,14 +13,8 @@ it to the user. PHP is used to scrap the content related to the weather conditio
         
         $forecast= $array2[0];
     }
-    
-    
-    
-}
+
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -49,7 +35,6 @@ it to the user. PHP is used to scrap the content related to the weather conditio
           position: relative;
         z-index:-1;
        }
-
 #video-background { 
   position: fixed;
     top: 0;
@@ -66,7 +51,6 @@ it to the user. PHP is used to scrap the content related to the weather conditio
            
            background:none;
        }
-
        .container{
            
            text-align: center;
@@ -110,7 +94,11 @@ it to the user. PHP is used to scrap the content related to the weather conditio
           <form>
   <div class="form-group">
     <label for="city">Enter the name of a city.</label>
-    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. Seattle, London" value="<?php echo $_GET['city']; ?>">
+    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. Seattle, London" value="<?php 
+    if(isset($_GET['city'])){
+            echo $_GET['city']; 
+    }
+    ?>">
     
   </div>
  
@@ -122,7 +110,7 @@ it to the user. PHP is used to scrap the content related to the weather conditio
       if($forecast){
           
     echo '<div class="alert alert-success" role="alert">'.$forecast.'</div>';
-      }else if($_GET["city"]==""){
+      }else if(!isset($_GET["city"])){
           echo "";
       }else{
           echo '<div class="alert alert-danger" role="alert">'."Sorry, this city could not be found.".'</div>';;
