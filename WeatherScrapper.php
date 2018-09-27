@@ -1,20 +1,20 @@
 <?php
-      
+
     $forecast="";
     if(isset($_GET["city"])){
         $city= str_replace(" ","",$_GET["city"]); //To remove the spaces within the name of a given city as New York so the website can track the url of the main website (weather-forecast.com) and scrap the desired parts from the whole page.
-        
-        $pageToBeScrapped= file_get_contents("https://www.weather-forecast.com/locations/".$city."/forecasts/latest");
-        
-        $array1= explode('3 days)</span><p class="b-forecast__table-description-content"><span class="phrase">',$pageToBeScrapped); //After execution of the explode function, the page now starts with the desired content followed by the rest of the page contents.
+    
+            if($pageToBeScrapped=@file_get_contents("https://www.weather-forecast.com/locations/".$city."/forecasts/latest")){
+                 $array1= explode('3 days)</span><p class="b-forecast__table-description-content"><span class="phrase">',$pageToBeScrapped); //After execution of the explode function, the page now starts with the desired content followed by the rest of the page contents.
         
         $array2= explode('</span></p></td>',$array1[1]);
         //After execution of the explode function, the page now only contains the desired content.
         
         $forecast= $array2[0];
-    }
-
+            }
+}
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,7 +27,7 @@
       
     <link rel="stylesheet" href="animate.css">  
 
-    <title>PHP Practice</title>
+    <title>Weather Scrapper</title>
       
    <style type=text/css>
        
